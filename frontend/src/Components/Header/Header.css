@@ -1,0 +1,189 @@
+header {
+  background-color: rgba(238, 239, 231, 0.86);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-radius: 0 0 10px 10px;
+  animation: slideDown 0.8s ease-out 0.1s both;
+  will-change: opacity, transform;
+  transform: translateZ(0);
+}
+
+.header-spacer {
+  height: 20px; /* Adjust this value to match the header height */
+  background: transparent; /* Optional: make the spacer transparent */
+}
+
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.Aura {
+  flex: 1;
+  max-width: fit-content;
+}
+
+.Aura h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-h);
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+#btn-menu {
+  width: 36px;
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  position: relative;
+  cursor: pointer;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bar {
+  width: 100%;
+  height: 4px;
+  background: #333;
+  position: relative;
+  margin: 4px 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.bar::after,
+.bar::before {
+  content: "";
+  width: 100%;
+  height: 4px;
+  background: #333;
+  position: absolute;
+  transition: all 0.3s ease-in-out;
+}
+
+.bar::after {
+  top: -8px;
+  left: 0;
+}
+
+.bar::before {
+  top: 8px;
+  left: 0;
+}
+
+#btn-menu.active .bar {
+  background-color: transparent;
+}
+
+#btn-menu.active .bar::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+#btn-menu.active .bar::after {
+  transform: rotate(-45deg);
+  top: 0;
+}
+
+
+nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--text-h);
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+nav a:hover {
+  color: #333;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #000;
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  #btn-menu {
+    display: flex;
+  }
+
+  nav {
+    position: fixed;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    height: 60vh;
+    background-color: rgba(238, 239, 231, 0.86);
+    opacity: 0;
+    transform: translateY(50%);
+    transition: transform 0.4s ease-in-out;
+    box-shadow: -4px 0 8px rgba(0, 0, 0, 0.1);
+    padding: 40px 20px;
+    z-index: 999;
+    border-radius: 10px;
+  }
+
+  nav.open {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  nav ul {
+    flex-direction: column;
+    justify-content:center;
+    gap: 3rem;
+    text-align: center;
+    width: 100%;
+    letter-spacing: 0.5px;
+  }
+
+  nav a {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  
+}
