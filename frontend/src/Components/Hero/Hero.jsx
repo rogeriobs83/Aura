@@ -3,7 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import hoverSound from "../../assets/Where_The_Mind_Breathes.mp4";
 import { useEffect, useState } from "react";
-import HeroBg from "frontend/public/hero.webp";
+
 
 function Hero() {
   // Referência para detectar quando o hero entra na tela
@@ -52,7 +52,7 @@ function Hero() {
         animate={heroInView ? { y: 0, opacity: 1 } : {}}
         transition={{ duration: 0.8, ease: "easeInOut" }}
       >
-        <img src="{HeroBg}" alt="Aura Hero Image" />
+        <img src="/hero.webp" alt="Aura Hero Image" />
         <h1>Design a Life That Feels Grounded and Purposeful</h1>
         <p>
           A minimalist lifestyle platform built to help you cultivate mindful
