@@ -23,8 +23,8 @@ function Hero() {
       })
       .then((data) => console.log("Initial data received:", data))
       .catch((err) => console.error("Erro no handshake pintão:", err));
-  }, []);
-
+  }, []); // ← roda só uma vez
+  
   const [successMsg, setSuccessMsg] = useState("");
 
   const handleSubmit = (e) => {
