@@ -17,7 +17,7 @@ function Hero() {
     fetch("https://aura-iz8x.onrender.com/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({ email: "teste@aura.com }),
     })
       .then((res) => res.json())
       .then((data) => console.log("Initial data received:", data))
