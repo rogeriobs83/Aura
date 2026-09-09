@@ -14,7 +14,7 @@ function Hero() {
 
   // 🔥 Handshake pintão com backend
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/signup", {
+    fetch("https://aura-iz8x.onrender.com/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: "teste@aura.com" }),
