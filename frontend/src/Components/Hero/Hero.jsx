@@ -56,7 +56,7 @@ function Hero() {
         animate={heroInView ? { y: 0, opacity: 1 } : {}}
         transition={{ duration: 0.8, ease: "easeInOut" }}
       >
-        <img src="src/assets/hero.webp" alt="Aura Hero Image" />
+        <img src="/hero.webp" alt="Aura Hero Image" />
         <h1>Design a Life That Feels Grounded and Purposeful</h1>
         <p>
           A minimalist lifestyle platform built to help you cultivate mindful
