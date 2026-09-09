@@ -1,30 +1,32 @@
 import "./Hero.css";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import hoverSound from "../../assets/Where_The_Mind_Breathes.mp4";
-import { useEffect, useState } from "react";
-
 
 function Hero() {
-  // Referência para detectar quando o hero entra na tela
   const heroRef = useRef(null);
   const heroInView = useInView(heroRef, { once: true });
 
-  // Handshake with backend for initial data or user session can be implemented here
+  // URL do backend público
+  const API_URL = import.meta.env.VITE_API_URL;
 
-  // 🔥 Handshake pintão com backend
+  // 🔥 Handshake pintão com backend (agora público)
   useEffect(() => {
-    fetch("https://aura-iz8x.onrender.com/signup", {
+    fetch(`${API_URL}/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: "teste@aura.com" }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
       .then((data) => console.log("Initial data received:", data))
-      .catch((err) => console.error("Erro no handshake python:", err));
-  }, []); // ← roda só uma vez
-  
+      .catch((err) => console.error("Erro no handshake pintão:", err));
+  }, []);
+
   const [successMsg, setSuccessMsg] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -32,19 +34,21 @@ function Hero() {
     const fullName = form["full-name"].value;
     const email = form["email-address"].value;
 
-    fetch("/signup", {
+    fetch(`${API_URL}/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ fullName, email }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
       .then((data) => setSuccessMsg(data.message))
       .catch((err) => console.error("Erro no signup:", err));
   };
 
   return (
     <main>
-      {/* Hero Section */}
       <motion.section
         id="hero"
         ref={heroRef}
@@ -52,7 +56,7 @@ function Hero() {
         animate={heroInView ? { y: 0, opacity: 1 } : {}}
         transition={{ duration: 0.8, ease: "easeInOut" }}
       >
-        <img src="/hero.webp" alt="Aura Hero Image" />
+        <img src="src/assets/hero.webp" alt="Aura Hero Image" />
         <h1>Design a Life That Feels Grounded and Purposeful</h1>
         <p>
           A minimalist lifestyle platform built to help you cultivate mindful
@@ -76,7 +80,6 @@ function Hero() {
         <audio id="hoverSound" src={hoverSound} preload="auto"></audio>
       </motion.section>
 
-      {/* About Section */}
       <ScrollSection id="about">
         <h2>The Aura Philosophy</h2>
         <p>
@@ -86,7 +89,6 @@ function Hero() {
         </p>
       </ScrollSection>
 
-      {/* Features Section */}
       <ScrollSection id="features">
         <h2>Designed for Your Wellbeing</h2>
 
@@ -115,7 +117,6 @@ function Hero() {
         </article>
       </ScrollSection>
 
-      {/* Community Section */}
       <ScrollSection id="community">
         <h2>Join a Growing Mindful Community</h2>
 
@@ -140,7 +141,6 @@ function Hero() {
         </article>
       </ScrollSection>
 
-      {/* Download Section */}
       <ScrollSection id="subscribe">
         <h2>Begin Your Mindful Routine Today</h2>
         <p>
@@ -180,11 +180,6 @@ function Hero() {
 }
 
 export default Hero;
-
-/* --------------------------
-   Componente reutilizável
-   para animar qualquer seção
---------------------------- */
 
 function ScrollSection({ id, children }) {
   const ref = useRef(null);
