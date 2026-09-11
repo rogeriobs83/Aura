@@ -54,7 +54,7 @@ useEffect(() => {
 
   return (
     <>
-    <header>
+    <header className="header">
             <div className="Aura">
               <h1>Aura.</h1>
             </div>
