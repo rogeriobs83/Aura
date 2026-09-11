@@ -25,7 +25,60 @@ main h1, main h2, main h3, main h4, main h5, main h6 {
 }
 
 
+.cta-button {
+    display: inline-block;
+    padding: 14px 32px;
+    margin: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    color: #f0f0f0 !important;
+}
 
+.cta-button:first-of-type {
+    background-color: var(--text-h);
+    color: #fff;
+}
+
+.cta-button:first-of-type:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+}
+
+.cta-button:last-of-type {
+    border: 2px solid #1a1a1a;
+    color: #1a1a1a;
+}
+
+.cta-button:last-of-type:hover {
+    background-color: #1a1a1a;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.sound-trigger {
+    display: inline-block;
+    padding: 14px 32px;
+    margin: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    color: #555 !important;
+    background-color: transparent;
+    border: #555 2px solid;
+}
+
+.sound-trigger:hover {
+    color: #f1ecec !important;
+    background-color: var(--text-h);
+    transform: translateY(-2px);
+}
 
 
 
@@ -51,38 +104,6 @@ main h1, main h2, main h3, main h4, main h5, main h6 {
     height: auto;
     margin-bottom: 30px;
     border-radius: 10px;
-}
-
-#hero a {
-    display: inline-block;
-    padding: 14px 32px;
-    margin: 10px;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 50px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-#hero a:first-of-type {
-    background-color: var(--text-h);
-    color: #fff;
-}
-
-#hero a:first-of-type:hover {
-    background-color: #333;
-    transform: translateY(-2px);
-}
-
-#hero a:last-of-type {
-    border: 2px solid #1a1a1a;
-    color: #1a1a1a;
-}
-
-#hero a:last-of-type:hover {
-    background-color: #1a1a1a;
-    color: #fff;
-    transform: translateY(-2px);
 }
 
 /* About Section */
@@ -196,6 +217,7 @@ main h1, main h2, main h3, main h4, main h5, main h6 {
     color: #efefef;
     text-align: center;
     border-radius: 10px;
+    position: relative;
 }
 
 #subscribe h2 {
@@ -264,6 +286,8 @@ main h1, main h2, main h3, main h4, main h5, main h6 {
     transform: translateY(-2px);
 }
 
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
     #hero h1 {
@@ -290,7 +314,7 @@ main h1, main h2, main h3, main h4, main h5, main h6 {
 
 @media (max-width: 480px) {
     #hero h1 {
-        font-size: 1.5rem;
+        font-size: 2.5rem;
     }
 
     #hero p {
@@ -303,7 +327,8 @@ main h1, main h2, main h3, main h4, main h5, main h6 {
         margin: 8px 5px;
     }
 
-    #about h2, #features h2, #community h2, #download h2 {
-        font-size: 1.5rem;
+    #about h2, #features h2, #community h2, #subscribe h2 {
+        font-size: 2.2rem;
+        line-height: 1.1;
     }
 }

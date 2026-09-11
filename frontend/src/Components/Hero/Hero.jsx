@@ -3,49 +3,79 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import hoverSound from "../../assets/Where_The_Mind_Breathes.mp4";
 
+function ScrollSection({ id, children }) {
+  const sectionRef = useRef(null);
+  const sectionInView = useInView(sectionRef, { once: true });
+
+  return (
+    <motion.section
+      id={id}
+      ref={sectionRef}
+      initial={{ y: 20, opacity: 0 }}
+      animate={sectionInView ? { y: 0, opacity: 1 } : {}}
+      transition={{ duration: 0.8, ease: "easeInOut" }}
+    >
+      {children}
+    </motion.section>
+  );
+}
+
 function Hero() {
   const heroRef = useRef(null);
   const heroInView = useInView(heroRef, { once: true });
 
-  // URL do backend público
   const API_URL = import.meta.env.VITE_API_URL;
+  const [successMsg, setSuccessMsg] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // 🔥 Handshake pintão com backend (agora público)
+  // Handshake otimizado com tratamento de erro isolado
   useEffect(() => {
+    if (!API_URL) return;
+
     fetch(`${API_URL}/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: "teste@aura.com" }),
     })
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
-      .then((data) => console.log("Initial data received:", data))
-      .catch((err) => console.error("Erro no handshake pintão:", err));
-  }, []); // ← roda só uma vez
-  
-  const [successMsg, setSuccessMsg] = useState("");
+      .then((res) => res.ok && res.json())
+      .then((data) => data && console.log("Handshake OK"))
+      .catch((err) => console.log("Handshake ignorado/falhou:", err));
+  }, [API_URL]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const form = e.target;
-    const fullName = form["full-name"].value;
-    const email = form["email-address"].value;
+  if (isSubmitting) return;
 
-    fetch(`${API_URL}/signup`, {
+  setIsSubmitting(true);
+  setSuccessMsg("");
+
+  const form = e.target;
+  const fullName = form["full-name"].value.trim();
+  const email = form["email-address"].value.trim();
+
+  try {
+    const res = await fetch(`${API_URL}/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ fullName, email }),
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
-      .then((data) => setSuccessMsg(data.message))
-      .catch((err) => console.error("Erro no signup:", err));
-  };
+    });
+
+    if (!res.ok) {
+      throw new Error("Erro ao enviar o formulário");
+    }
+
+    const data = await res.json();
+
+    setSuccessMsg(data.message || "Enviado com sucesso!");
+  } catch (err) {
+    console.error("ERRO NO FETCH:", err);
+    setSuccessMsg("Falha ao enviar. Tente novamente.");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
   return (
     <main>
@@ -63,19 +93,29 @@ function Hero() {
           daily habits, organize your wellness routines, and focus on what truly
           matters.
         </p>
-        <a href="#subscribe">Start Your Journey</a>
+        <a href="/Download">Start Your Journey</a>
 
-        <a
-          href="#"
+        <button
+          className="sound-trigger"
+          onTouchStart={() => {
+            const sound = document.getElementById("hoverSound");
+            if (sound) {
+              sound.currentTime = 0;
+              sound.play();
+              sound.volume = 0.1;
+            }
+          }}
           onMouseEnter={() => {
             const sound = document.getElementById("hoverSound");
-            sound.currentTime = 0;
-            sound.play();
-            sound.volume = 0.1;
+            if (sound) {
+              sound.currentTime = 0;
+              sound.play();
+              sound.volume = 0.1;
+            }
           }}
         >
-          Passe o mouse aqui
-        </a>
+          Passe ou toque aqui
+        </button>
 
         <audio id="hoverSound" src={hoverSound} preload="auto"></audio>
       </motion.section>
@@ -116,31 +156,34 @@ function Hero() {
           </p>
         </article>
       </ScrollSection>
+      <section id="community" className="wrapper">
+        <ScrollSection id="community-unit">
+          <h2>Join a Growing Mindful Community</h2>
 
-      <ScrollSection id="community">
-        <h2>Join a Growing Mindful Community</h2>
+          <article>
+            <blockquote>
+              "Aura completely changed how I start my mornings. Less scrolling,
+              more focus, and a steady sense of calm."
+            </blockquote>
+            <p>
+              <strong>— Elena R.</strong>, Interior Designer
+            </p>
+          </article>
 
-        <article>
-          <blockquote>
-            "Aura completely changed how I start my mornings. Less scrolling,
-            more focus, and a steady sense of calm."
-          </blockquote>
-          <p>
-            <strong>— Elena R.</strong>, Interior Designer
-          </p>
-        </article>
+          <article>
+            <blockquote>
+              "The cleanest habit tracker I have ever used. It gives me clarity
+              without cluttering my mind."
+            </blockquote>
+            <p>
+              <strong>— Marcus V.</strong>, Digital Creator
+            </p>
+          </article>
 
-        <article>
-          <blockquote>
-            "The cleanest habit tracker I have ever used. It gives me clarity
-            without cluttering my mind."
-          </blockquote>
-          <p>
-            <strong>— Marcus V.</strong>, Digital Creator
-          </p>
-        </article>
-      </ScrollSection>
-
+        </ScrollSection>
+        <div id="holder" className="holder"></div>
+      </section>
+      
       <ScrollSection id="subscribe">
         <h2>Begin Your Mindful Routine Today</h2>
         <p>
@@ -171,7 +214,9 @@ function Hero() {
             />
           </div>
 
-          <button type="submit">Get Early Access</button>
+          <button type="submit" id="submit-button" >
+            {isSubmitting ? "Enviando..." : "Get Early Access"}
+          </button>
           {successMsg && <p className="success">{successMsg}</p>}
         </form>
       </ScrollSection>
@@ -180,20 +225,3 @@ function Hero() {
 }
 
 export default Hero;
-
-function ScrollSection({ id, children }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-
-  return (
-    <motion.section
-      id={id}
-      ref={ref}
-      initial={{ y: 20, opacity: 0 }}
-      animate={isInView ? { y: 0, opacity: 1 } : {}}
-      transition={{ duration: 0.8, ease: "easeInOut" }}
-    >
-      {children}
-    </motion.section>
-  );
-}

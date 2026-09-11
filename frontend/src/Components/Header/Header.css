@@ -152,22 +152,21 @@ nav a:hover::after {
   }
 
   nav {
-    position: fixed;
-    top: 100%;
-    right: 0;
-    width: 100%;
-    height: 60vh;
     background-color: rgba(238, 239, 231, 0.86);
+    position: absolute; /* ou fixed, o que você estiver usando */
+    top: 100%;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+    visibility: hidden; /* 👈 ISSO AQUI FAZ O ELEMENTO SUMIR DO MAPA DE TOQUE */
     opacity: 0;
-    transform: translateY(50%);
-    transition: transform 0.4s ease-in-out;
-    box-shadow: -4px 0 8px rgba(0, 0, 0, 0.1);
-    padding: 40px 20px;
-    z-index: 999;
-    border-radius: 10px;
+    overflow: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
   }
 
   nav.open {
+    pointer-events: auto;
+    visibility: visible; /* 👈 ISSO AQUI FAZ O ELEMENTO VOLTAR AO MAPA DE TOQUE */
     opacity: 1;
     transform: translateY(0);
   }

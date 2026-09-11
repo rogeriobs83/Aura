@@ -18,19 +18,22 @@ export default function Header() {
   open: {
     opacity: 1,
     x: 0,
+    pointerEvents: "auto",
     transition: { duration: 0.25, ease: "easeOut" }
   },
   closed: {
     opacity: 0,
     x: -15,
+    pointerEvents: "none",
     transition: { duration: 0.2, ease: "easeIn" }
   }
 };
-const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
+
+const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
 useEffect(() => {
   function handleResize() {
-    setIsDesktop(window.innerWidth > 768);
+    setIsMobile(window.innerWidth <= 768);
   }
   window.addEventListener("resize", handleResize);
   return () => window.removeEventListener("resize", handleResize);
@@ -61,14 +64,15 @@ useEffect(() => {
         <nav className={open ? "open" : ""}>
             
             <motion.ul
-              initial={isDesktop ? false : "closed"}
-              animate={isDesktop ? false : open ? "open" : "closed"}
-              variants={isDesktop ? {} : menuVariants}
+             
+              initial={isMobile ? "closed" : false}
+              animate={isMobile ? open ? "open" : "closed" : false}
+              variants={isMobile ? menuVariants : {}}
             >
-                <motion.li variants={itemVariants}><a href="/Philosophy">Philosophy</a></motion.li>
-                <motion.li variants={itemVariants}><a href="/Features">App Features</a></motion.li>
-                <motion.li variants={itemVariants}><a href="/Community">Community</a></motion.li>
-                <motion.li variants={itemVariants}><a href="/Download">Get Started</a></motion.li>
+                <motion.li variants={itemVariants}><a href="/Philosophy" onClick={() => setOpen(false)}>Philosophy</a></motion.li>
+                <motion.li variants={itemVariants}><a href="/Features" onClick={() => setOpen(false)}>App Features</a></motion.li>
+                <motion.li variants={itemVariants}><a href="#community" onClick={() => setOpen(false)}>Community</a></motion.li>
+                <motion.li variants={itemVariants}><a href="#holder" onClick={() => setOpen(false)}>Get Started</a></motion.li>
             </motion.ul>
         </nav>
     </header>
