@@ -93,7 +93,7 @@ function Hero() {
           daily habits, organize your wellness routines, and focus on what truly
           matters.
         </p>
-        <a href="/Download">Start Your Journey</a>
+        <a href="/Download" className="cta-button">Start Your Journey</a>
 
         <button
           className="sound-trigger"
@@ -118,6 +118,7 @@ function Hero() {
         </button>
 
         <audio id="hoverSound" src={hoverSound} preload="auto"></audio>
+        <div id="link"></div>
       </motion.section>
 
       <ScrollSection id="about">
@@ -127,6 +128,7 @@ function Hero() {
           with your core values—combining habit tracking, wellness journaling,
           and mindful planning in one seamless daily experience.
         </p>
+        <div id="link-1"></div>
       </ScrollSection>
 
       <ScrollSection id="features">
@@ -155,9 +157,9 @@ function Hero() {
             insights that reward progress, not perfection.
           </p>
         </article>
+        <div id="link-2"></div>
       </ScrollSection>
-      <section id="community" className="wrapper">
-        <ScrollSection id="community-unit">
+        <ScrollSection id="community">
           <h2>Join a Growing Mindful Community</h2>
 
           <article>
@@ -180,9 +182,9 @@ function Hero() {
             </p>
           </article>
 
+        <div id="link-3"></div>
         </ScrollSection>
-        <div id="holder" className="holder"></div>
-      </section>
+      
       
       <ScrollSection id="subscribe">
         <h2>Begin Your Mindful Routine Today</h2>

@@ -69,10 +69,10 @@ useEffect(() => {
               animate={isMobile ? open ? "open" : "closed" : false}
               variants={isMobile ? menuVariants : {}}
             >
-                <motion.li variants={itemVariants}><a href="/Philosophy" onClick={() => setOpen(false)}>Philosophy</a></motion.li>
-                <motion.li variants={itemVariants}><a href="/Features" onClick={() => setOpen(false)}>App Features</a></motion.li>
-                <motion.li variants={itemVariants}><a href="#community" onClick={() => setOpen(false)}>Community</a></motion.li>
-                <motion.li variants={itemVariants}><a href="#holder" onClick={() => setOpen(false)}>Get Started</a></motion.li>
+                <motion.li variants={itemVariants}><a href="#link" onClick={() => setOpen(false)}>Philosophy</a></motion.li>
+                <motion.li variants={itemVariants}><a href="#link-1" onClick={() => setOpen(false)}>App Features</a></motion.li>
+                <motion.li variants={itemVariants}><a href="#link-2" onClick={() => setOpen(false)}>Community</a></motion.li>
+                <motion.li variants={itemVariants}><a href="#link-3" onClick={() => setOpen(false)}>Get Started</a></motion.li>
             </motion.ul>
         </nav>
     </header>
