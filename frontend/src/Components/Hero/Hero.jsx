@@ -93,7 +93,7 @@ function Hero() {
           daily habits, organize your wellness routines, and focus on what truly
           matters.
         </p>
-        <a href="/Download" className="cta-button>Start Your Journey</a>
+        <a href="/Download" className="cta-button">Start Your Journey</a>
 
         <button
           className="sound-trigger"
