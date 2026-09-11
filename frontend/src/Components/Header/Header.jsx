@@ -72,7 +72,7 @@ useEffect(() => {
                 <motion.li variants={itemVariants}><a href="#link" onClick={() => setOpen(false)}>Philosophy</a></motion.li>
                 <motion.li variants={itemVariants}><a href="#link-1" onClick={() => setOpen(false)}>App Features</a></motion.li>
                 <motion.li variants={itemVariants}><a href="#link-2" onClick={() => setOpen(false)}>Community</a></motion.li>
-                <motion.li variants={itemVariants}><a href="#link-3" onClick={() => setOpen(false)}>Get Started</a></motion.li>
+                <motion.li variants={itemVariants}><a href="#subscribe" onClick={() => setOpen(false)}>Get Started</a></motion.li>
             </motion.ul>
         </nav>
     </header>
