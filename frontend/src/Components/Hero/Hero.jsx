@@ -63,7 +63,7 @@ function Hero() {
           daily habits, organize your wellness routines, and focus on what truly
           matters.
         </p>
-        <a href="/Download">Start Your Journey</a>
+        <a href="#subscribe">Start Your Journey</a>
 
         <a
           href="#"
