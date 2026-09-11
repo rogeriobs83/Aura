@@ -118,7 +118,7 @@ function Hero() {
         </button>
 
         <audio id="hoverSound" src={hoverSound} preload="auto"></audio>
-      
+        <div id="link"></div>
       </motion.section>
 
       <ScrollSection id="about">
@@ -128,7 +128,7 @@ function Hero() {
           with your core values—combining habit tracking, wellness journaling,
           and mindful planning in one seamless daily experience.
         </p>
-        
+        <div id="link-1"></div>
       </ScrollSection>
 
       <ScrollSection id="features">
@@ -157,7 +157,7 @@ function Hero() {
             insights that reward progress, not perfection.
           </p>
         </article>
-        
+        <div id="link-2"></div>
       </ScrollSection>
         <ScrollSection id="community">
           <h2>Join a Growing Mindful Community</h2>
@@ -181,6 +181,8 @@ function Hero() {
               <strong>— Marcus V.</strong>, Digital Creator
             </p>
           </article>
+
+        <div id="link-3"></div>
         </ScrollSection>
       
       
