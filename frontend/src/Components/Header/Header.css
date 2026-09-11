@@ -178,6 +178,7 @@ nav a:hover::after {
     text-align: center;
     width: 100%;
     letter-spacing: 0.5px;
+    margin-botton: 3rem;
   }
 
   nav a {
